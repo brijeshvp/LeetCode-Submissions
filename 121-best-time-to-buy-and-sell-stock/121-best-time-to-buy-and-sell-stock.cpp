@@ -27,11 +27,6 @@ public:
             mx = max(mx,p[i]-prefMin);
         }
         
-        // int mx = 0;
-        // for(int i=0;i<n;++i){
-        //     mx = max(mx,p[i]-prefMin[i]);
-        // }
-        
         return mx;
     }
 };
