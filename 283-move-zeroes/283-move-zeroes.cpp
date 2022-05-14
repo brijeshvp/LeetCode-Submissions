@@ -1,7 +1,18 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        // brute -> TC: O(N^2) and SC: O(1)
+        // brute(with extra space)
+        int n = nums.size();
+        vector<int> temp(n,0);
+        int j = 0;
+        for(int i=0;i<n;++i){
+            if(nums[i]!=0){
+                temp[j] = nums[i]; 
+                j++;
+            }
+        }
+        nums = temp;
+        // intermediate -> TC: O(N^2) and SC: O(1)
 //         int ctZero = 0;
 //         vector<int> ind;
         
@@ -31,17 +42,17 @@ public:
 //         }
         
         
-        // best(optimal) -> TC: O(N) and SC: O(1)
-        int j = 0;
-        for(;j<nums.size();++j){
-            if(nums[j]==0)break;
-        }
+//         // best(optimal) -> TC: O(N) and SC: O(1)
+//         int j = 0;
+//         for(;j<nums.size();++j){
+//             if(nums[j]==0)break;
+//         }
         
-        for(int i=j+1;i<nums.size();++i){
-            if(nums[i]!=0){
-                swap(nums[i],nums[j]);
-                j++;
-            }
-        }
+//         for(int i=j+1;i<nums.size();++i){
+//             if(nums[i]!=0){
+//                 swap(nums[i],nums[j]);
+//                 j++;
+//             }
+//         }
     }
 };
