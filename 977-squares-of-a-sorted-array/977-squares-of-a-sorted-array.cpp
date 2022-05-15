@@ -63,7 +63,7 @@ public:
 //     }
     
     
-    
+    // intermediate: TC: O(NlogN) and SC: O(1)
     vector<int> sortedSquares(vector<int>& a) {
         int n = a.size();
         
