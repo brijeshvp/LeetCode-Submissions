@@ -39,6 +39,7 @@ public:
 //         return m;
 //     }
     
+    // TC: O(N) and SC: O(N)
     int majorityElement(vector<int>& a) {
         int n = a.size();
         
@@ -47,7 +48,7 @@ public:
             mp[a[i]]++;
             if(mp[a[i]]>n/2)return a[i];
         }
-        return -1;
+        return -1;  // if no majority elt
         
     }
 };
