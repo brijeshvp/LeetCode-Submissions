@@ -38,6 +38,15 @@ public:
     // level wise bfs
     int maxDistance(vector<vector<int>>& g) {
         int n = g.size();
+        int z_ct = 0, o_ct = 0;
+        for(int i=0;i<n;++i){
+            for(int j=0;j<n;++j){
+                if(g[i][j]==0)z_ct++;
+                else o_ct++;
+            }
+        }
+        if(z_ct == n*n || o_ct == n*n)return -1;
+        
         queue<pair<int,int>> q;
         
         for(int i=0;i<n;++i){
@@ -51,10 +60,9 @@ public:
             }
         }
         
-        int dist = 0;
+        int dist = 1;
         while(!q.empty()){
-            dist++;
-    
+            // dist++;
             int sz = q.size();
             for(int x=0;x<sz;++x){
                 auto node = q.front();
@@ -72,10 +80,19 @@ public:
                     q.push({i,j-1});
                     q.push({i,j+1});
                 }
-            }       
+            }
+            dist++;
         }
         // dist = 0 or dist = 1 -> ans = -1
         // else ans = dist-1
-        return dist==1?-1:dist-1;
+        // return dist==1?-1:dist-1;
+        
+        int mx = -1;
+        for(int i=0;i<n;++i){
+            for(int j=0;j<n;++j){
+                mx = max(mx,g[i][j]);
+            }
+        }
+        return mx;
     }   
 };
