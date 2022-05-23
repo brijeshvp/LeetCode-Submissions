@@ -53,12 +53,6 @@ public:
                 int j = it.second;
                 
                 if(i<0 || j<0 || i>=n || j>=n || g[i][j]!=0)continue;
-                // if(g[i][j]==-1){
-                //     flag = true;
-                //     x = i;
-                //     y = j;
-                //     break;
-                // }
                 
                 g[i][j] = dist;
                 q.push({i+1,j});
@@ -71,12 +65,6 @@ public:
         }
         
         int ans = INT_MAX;
-        // if(x+1>=0 && y>=0 && x+1<n && y<n && g[x+1][y]>0)ans = min(ans,g[x+1][y]);
-        // if(x-1>=0 && y>=0 && x-1<n && y<n && g[x-1][y]>0)ans = min(ans,g[x-1][y]);
-        // if(x>=0 && y+1>=0 && x<n && y+1<n && g[x][y+1]>0)ans = min(ans,g[x][y+1]);
-        // if(x>=0 && y-1>=0 && x<n && y-1<n && g[x][y-1]>0)ans = min(ans,g[x][y-1]);
-        
-        // return ans;
         for(int x=0;x<n;++x){
             for(int y=0;y<n;++y){
                 if(g[x][y]==-1){
