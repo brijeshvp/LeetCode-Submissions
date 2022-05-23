@@ -3,7 +3,8 @@ public:
     void solve(int i,vector<int> &c,int t,vector<vector<int>> &ans,vector<int> &combi){
         if(t<0)return;
         if(t==0){
-            ans.push_back(combi); 
+            ans.push_back(combi);
+            // elts are +ve -> so going ahead will increase the sum -> thus return
             return;
         }
         // if t!=0 but i == n
