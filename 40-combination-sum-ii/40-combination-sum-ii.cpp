@@ -36,7 +36,9 @@ public:
     
     
     
-    
+    // approach-2 -> TC: O(2^n * k) where k = average length of current combination 
+    // SC = O(k * x) where x = #combinations and k = average length of current combination
+    // this SC is not call stack space
     void solve(int ind,int t,vector<int> &currCombi,vector<vector<int>> &ans,vector<int>&c){
         if(t==0){
             ans.push_back(currCombi);
