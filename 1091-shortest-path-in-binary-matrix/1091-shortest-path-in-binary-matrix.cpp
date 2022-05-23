@@ -5,11 +5,11 @@ public:
         queue<pair<int,int>> q;
         q.push({i,j});
         
-        int dist = 0;
+        int dist = 1;
         vector<vector<int>> dir = {{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1},{0,1},{1,1}};
         
         while(!q.empty()){
-            dist++;
+            // dist++;
             int sz = q.size();
             while(sz--){
                 int x = q.front().first;
@@ -22,6 +22,7 @@ public:
                     q.push({x+it[0],y+it[1]});
                 }   
             }
+            dist++;
         }
     }
     
