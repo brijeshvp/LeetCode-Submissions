@@ -12,7 +12,7 @@ public:
         
         combi.push_back(c[i]);
         solve(i,c,t-c[i],ans,combi);
-        combi.pop_back();
+        combi.pop_back();   // backtrack
         solve(i+1,c,t,ans,combi);
     }
     vector<vector<int>> combinationSum(vector<int>& c, int t) {
