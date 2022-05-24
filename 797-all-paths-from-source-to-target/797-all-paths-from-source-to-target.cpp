@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // backtracking approach
     void solve(int node,vector<vector<int>> &g,vector<vector<int>>&ans,vector<int>&currPath){
         currPath.push_back(node);
         if(node==g.size()-1){
