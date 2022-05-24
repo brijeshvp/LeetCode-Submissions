@@ -30,7 +30,8 @@ public:
 //     }
     
     
-    
+    // approach-2: without extra space(no hash array or map required)
+    // TC: O(n!*n) and SC: O(1) (apart from vector of vector in which we will store all permutations)
     void solve(int ind,vector<int>&a,vector<vector<int>>&ans){
         if(ind==a.size()){
             ans.push_back(a);
