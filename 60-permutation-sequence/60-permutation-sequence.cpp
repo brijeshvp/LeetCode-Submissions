@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // TC: O(N^2) N for storing each digits in ans and N for erasing a number from a vector
     string getPermutation(int n, int k) {
         int fact = 1;
         vector<int> numbers;
