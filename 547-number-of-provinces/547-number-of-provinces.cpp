@@ -79,6 +79,11 @@ public:
             }
         }
         
-        return n;
+        // return n;
+        int cc = 0;
+        for(int i=0;i<mat.size();++i){
+            if(par[i] == i)cc++;
+        }
+        return cc;
     }
 };
