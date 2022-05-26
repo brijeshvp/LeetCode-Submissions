@@ -31,42 +31,80 @@ public:
     
     
     
-    
+
     // the given problem can be considered as a cycle detection problem. If none of the paths from the starting node contains a cycle, the starting node can be called a safe vertex. 
-    vector<int> eventualSafeNodes(vector<vector<int>>& g) {
-        // g is the adj list given as input
+    
+    // approach-1: BFS: TC: O(V+E) and SC: O(V + E)
+//     vector<int> eventualSafeNodes(vector<vector<int>>& g) {
+//         // g is the adj list given as input
         
-        int n = g.size();
-        vector<bool> safe(n,false);
-        vector<unordered_set<int>> graph(n), rgraph(n);
+//         int n = g.size();
+//         vector<bool> safe(n,false);
+//         vector<unordered_set<int>> graph(n), rgraph(n);
         
-        queue<int> q;
+//         queue<int> q;
         
-        for(int i=0;i<n;++i){
-            if(g[i].size()==0)q.push(i);
-            for(int it : g[i]){
-                graph[i].insert(it);
-                rgraph[it].insert(i);
-            }
-        }
+//         for(int i=0;i<n;++i){
+//             if(g[i].size()==0)q.push(i);
+//             for(int it : g[i]){
+//                 graph[i].insert(it);
+//                 rgraph[it].insert(i);
+//             }
+//         }
         
-        while(!q.empty()){
-            int node = q.front();
-            q.pop();
+//         while(!q.empty()){
+//             int node = q.front();
+//             q.pop();
             
-            safe[node] = true;
+//             safe[node] = true;
             
-            for(int it : rgraph[node]){
-                graph[it].erase(node);
+//             for(int it : rgraph[node]){
+//                 graph[it].erase(node);
                 
-                if(graph[it].size()==0)q.push(it);
+//                 if(graph[it].size()==0)q.push(it);
+//             }
+//         }
+        
+//         vector<int> ans;
+//         for(int i=0;i<n;++i){
+//             if(safe[i])ans.push_back(i);
+//         }
+//         return ans;
+//     }
+    
+    
+    // approach-2 -> DFS -> TC: O(V+E) and SC:O(V)
+    int white = 0;
+    int gray = 1;
+    int black = 2;
+    
+    bool dfs(int node,vector<vector<int>>&g,vector<int>&color){
+        color[node] = gray;   
+        
+        for(int it : g[node]){
+            if(color[it]==black)continue;
+            else if(color[it]==gray)return false;   // cycle
+            else if(color[it]==white){
+                if(!dfs(it,g,color))return false;
             }
         }
         
-        vector<int> ans;
+        color[node] = black;
+        return true;
+    }
+    
+    vector<int> eventualSafeNodes(vector<vector<int>>& g) {
+        int n = g.size();
+        
+        vector<int> safe;
+        vector<int> color(n,white);
         for(int i=0;i<n;++i){
-            if(safe[i])ans.push_back(i);
+            if(color[i]==black)safe.push_back(i);
+            else if(color[i]==gray)continue;
+            else if(color[i]==white){
+                if(dfs(i,g,color))safe.push_back(i);
+            }
         }
-        return ans;
+        return safe;
     }
 };
