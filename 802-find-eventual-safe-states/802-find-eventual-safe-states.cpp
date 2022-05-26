@@ -73,23 +73,61 @@ public:
 //     }
     
     
-    // approach-2 -> DFS -> TC: O(V+E) and SC:O(V)
-    int white = 0;
-    int gray = 1;
-    int black = 2;
+//     // approach-2 -> DFS -> TC: O(V+E) and SC:O(V)
+//     int white = 0;
+//     int gray = 1;
+//     int black = 2;
     
-    bool dfs(int node,vector<vector<int>>&g,vector<int>&color){
-        color[node] = gray;   
+//     bool dfs(int node,vector<vector<int>>&g,vector<int>&color){
+//         color[node] = gray;   
+        
+//         for(int it : g[node]){
+//             if(color[it]==black)continue;
+//             else if(color[it]==gray)return false;   // cycle
+//             else if(color[it]==white){
+//                 if(!dfs(it,g,color))return false;
+//             }
+//         }
+        
+//         color[node] = black;
+//         return true;
+//     }
+    
+//     vector<int> eventualSafeNodes(vector<vector<int>>& g) {
+//         int n = g.size();
+        
+//         vector<int> safe;
+//         vector<int> color(n,white);
+//         for(int i=0;i<n;++i){
+//             if(color[i]==black)safe.push_back(i);
+//             else if(color[i]==gray)continue;
+//             else if(color[i]==white){
+//                 if(dfs(i,g,color))safe.push_back(i);
+//             }
+//         }
+//         return safe;
+//     }
+    
+    
+    
+    
+    
+    
+    
+    
+    // approach-3 -> my approach -> DFS -> TC: O(V+E) and SC:O(V)
+    bool dfs(int node,vector<vector<int>>&g,vector<int>&vis,vector<int>&safe){
+        vis[node] = 1;   
         
         for(int it : g[node]){
-            if(color[it]==black)continue;
-            else if(color[it]==gray)return false;   // cycle
-            else if(color[it]==white){
-                if(!dfs(it,g,color))return false;
-            }
+            if(find(safe.begin(),safe.end(),it)!=safe.end())continue;
+            
+            if(vis[it])return false;    // cycle
+                
+            if(!dfs(it,g,vis,safe))return false;
         }
         
-        color[node] = black;
+        safe.push_back(node);
         return true;
     }
     
@@ -97,14 +135,13 @@ public:
         int n = g.size();
         
         vector<int> safe;
-        vector<int> color(n,white);
+        vector<int> vis(n,0);
         for(int i=0;i<n;++i){
-            if(color[i]==black)safe.push_back(i);
-            else if(color[i]==gray)continue;
-            else if(color[i]==white){
-                if(dfs(i,g,color))safe.push_back(i);
-            }
+            // if(!vis[i] && dfs(i,g,vis,safe))safe.push_back(i);
+            if(!vis[i])dfs(i,g,vis,safe);
         }
+        
+        sort(safe.begin(),safe.end());
         return safe;
     }
 };
