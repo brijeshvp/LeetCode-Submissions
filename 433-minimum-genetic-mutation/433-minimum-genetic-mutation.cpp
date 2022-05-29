@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minMutation(string start, string end, vector<string>& bank) {
-        unordered_set<string> dict(bank.begin(), bank.end());
+        unordered_set<string> dict(bank.begin(), bank.end()),seen;
         if(!dict.count(end)) return -1;
         
         queue<string> q;
@@ -13,7 +13,19 @@ public:
                 string t = q.front();
                 q.pop();
                 if(t==end) return dist;
-                addWord(t, dict, q);
+                // addWord(t, dict, q);
+                
+                for(int i=0; i<t.size(); i++) {
+                    char tmp = t[i];
+                    for(char c:string("ACGT")) {
+                        t[i] = c;
+                        if(dict.count(t) && !seen.count(t)) {
+                            q.push(t);
+                            seen.insert(t);
+                        }
+                    }
+                    t[i] = tmp;
+                }
             }
             dist++;
         }
@@ -21,18 +33,18 @@ public:
         
     }
     
-    void addWord(string word, unordered_set<string>& dict, queue<string>& q) {
-        dict.erase(word);
-        for(int i=0; i<word.size(); i++) {
-            char tmp = word[i];
-            for(char c:string("ACGT")) {
-                word[i] = c;
-                if(dict.count(word)) {
-                    q.push(word);
-                    dict.erase(word);
-                }
-            }
-            word[i] = tmp;
-        }
-    }
+    // void addWord(string word, unordered_set<string>& dict, queue<string>& q) {
+    //     dict.erase(word);
+    //     for(int i=0; i<word.size(); i++) {
+    //         char tmp = word[i];
+    //         for(char c:string("ACGT")) {
+    //             word[i] = c;
+    //             if(dict.count(word)) {
+    //                 q.push(word);
+    //                 dict.erase(word);
+    //             }
+    //         }
+    //         word[i] = tmp;
+    //     }
+    // }
 };
