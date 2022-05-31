@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // just check if the graph is bipartite or not(my notes of striver's graph series)
     bool bfs(int i,vector<int> adj[],vector<int>&color){
         queue<int> q;
         q.push(i);
