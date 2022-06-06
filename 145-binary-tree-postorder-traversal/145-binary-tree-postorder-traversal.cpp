@@ -11,52 +11,55 @@
  */
 class Solution {
 public:
-//     vector<int> postorderTraversal(TreeNode* root) {
-//         vector<int> post;
-        
-// 		if(!root)return post;
-        
-// 		TreeNode* pre = NULL;
-//         stack<TreeNode*> st;
-// 		while(!st.empty() || root!=NULL){
-// 			if(root!=NULL){				
-// 				st.push(root);
-// 				root = root->left;
-// 			}
-// 			else{
-// 				root = st.top();
-// 				if(root->right==NULL || root->right==pre){
-// 				    post.push_back(root->val);
-// 				    st.pop();
-// 				    pre=root;
-// 				    root = NULL;
-// 				}
-// 				else root = root->right;
-// 			}
-// 		}
-// 		return post;
-//     }
-    
-    
+    // approach-1 -> using one stack
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> post;
-        if(!root)return post;
         
-        // find root right left
-        // then take reverse
-        // it becomes left right root = postorder
+		if(!root)return post;
+        
+        TreeNode* currNode = root;
+		TreeNode* pre = NULL;
         stack<TreeNode*> st;
-        st.push(root);
-        while(!st.empty()){
-            TreeNode* currNode = st.top();
-            st.pop();
-            
-            post.push_back(currNode->val);
-            if(currNode->left)st.push(currNode->left);
-            if(currNode->right)st.push(currNode->right);
-        }
-        
-        reverse(post.begin(),post.end());
-        return post;
+		while(!st.empty() || currNode!=NULL){
+			if(currNode!=NULL){				
+				st.push(currNode);
+				currNode = currNode->left;
+			}
+			else{
+				currNode = st.top();
+				if(currNode->right==NULL || currNode->right==pre){
+				    post.push_back(currNode->val);
+				    st.pop();
+				    pre=currNode;
+				    currNode = NULL;
+				}
+				else currNode = currNode->right;
+			}
+		}
+		return post;
     }
+    
+    
+//     // approach-2:
+//     vector<int> postorderTraversal(TreeNode* root) {
+//         vector<int> post;
+//         if(!root)return post;
+        
+//         // find root right left
+//         // then take reverse
+//         // it becomes left right root = postorder
+//         stack<TreeNode*> st;
+//         st.push(root);
+//         while(!st.empty()){
+//             TreeNode* currNode = st.top();
+//             st.pop();
+            
+//             post.push_back(currNode->val);
+//             if(currNode->left)st.push(currNode->left);
+//             if(currNode->right)st.push(currNode->right);
+//         }
+        
+//         reverse(post.begin(),post.end());
+//         return post;
+//     }
 };
