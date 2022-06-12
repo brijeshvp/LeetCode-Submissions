@@ -19,7 +19,7 @@ public:
     
     
     
-    
+    // sliding window
     int minOperations(vector<int>& a, int x) {
         int n = a.size();
         long long sum = 0;
