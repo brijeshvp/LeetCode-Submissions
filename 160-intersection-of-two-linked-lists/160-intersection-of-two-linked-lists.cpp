@@ -9,20 +9,35 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        if(!headA || !headB)return NULL;
+//         // approach-1 : using extra space TC: O(m+n) and SC: O(m)
+//         if(!headA || !headB)return NULL;
         
-        map<ListNode*,int> mp;
-        ListNode* temp = headA;
-        while(temp){
-            mp[temp] = 1;
-            temp = temp->next;
+//         map<ListNode*,int> mp;
+//         ListNode* temp = headA;
+//         while(temp){
+//             mp[temp] = 1;
+//             temp = temp->next;
+//         }
+        
+//         temp = headB;
+//         while(temp){
+//             if(mp.find(temp)!=mp.end())return temp;
+//             temp = temp->next;
+//         }
+//         return NULL;
+        
+        
+        
+        // approach-2 : without extra space TC: O(m+n) and SC: O(1)
+        ListNode *a = headA, *b = headB;
+        while(a!=b){
+            if(a==NULL)a = headB;
+            else a = a->next;
+            
+            if(b==NULL)b = headA;
+            else b = b->next;
         }
         
-        temp = headB;
-        while(temp){
-            if(mp.find(temp)!=mp.end())return temp;
-            temp = temp->next;
-        }
-        return NULL;
+        return a;
     }
 };
