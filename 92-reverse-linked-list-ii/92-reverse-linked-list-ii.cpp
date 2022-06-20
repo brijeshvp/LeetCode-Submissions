@@ -23,25 +23,26 @@ public:
     }
     
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        if(head==NULL || head->next==NULL)return head;
+        if(head==NULL || head->next==NULL)return head;  // nothing to reverse
         
         ListNode *dummy = new ListNode(-1);
         dummy->next = head;
         
-        ListNode *tail1 = dummy, *tail2 = dummy, *prevToTail1 = dummy;
-        int dist1 = left - 1, dist2 = right;
-        while(prevToTail1!=NULL && dist1--){
-            prevToTail1 = prevToTail1->next;
+        ListNode *end = dummy, *prevToStart = dummy;
+        int dist1 = left - 1;    // start is at dist left from dummy, then prevToStart will be at dist left-1 from dummy(obvious)
+        while(prevToStart!=NULL && dist1--){
+            prevToStart = prevToStart->next;
         }
-        tail1 = prevToTail1->next;
+        ListNode *start = prevToStart->next;
         
-        while(tail2!=NULL && dist2--){
-            tail2 = tail2->next;
+        int dist2 = right;  // end will be at dist right from dummy
+        while(end!=NULL && dist2--){
+            end = end->next;
         }
         
-        ListNode *afterTail2 = tail2->next;
-        prevToTail1->next = reverse(tail1,tail2);
-        tail1->next = afterTail2;
+        ListNode *nextToEnd = end->next;    // save, so that after reversal start becomes new end so it can point to nextToEnd.
+        prevToStart->next = reverse(start,end); // end becomes new start after reversal, so prevToStart can point to it
+        start->next = nextToEnd;
         
         return dummy->next;
     }
