@@ -10,8 +10,8 @@ public:
             if(a[i]==0)sum-=1;  // add -1 to sum
             else sum+=1;
             
-            // our goal is to get sum=1(it means #1s one more than #0s)
-            // to get sum=1, curr sum - (curr sum) => sum = 1 
+            // our goal is to get sum=0(it means #1s equals to #0s)
+            // to get sum=0, curr sum - (curr sum) => sum = 0 
             // thus search curr sum
             if(mp.count(sum)){
                 int ind = mp[sum];
