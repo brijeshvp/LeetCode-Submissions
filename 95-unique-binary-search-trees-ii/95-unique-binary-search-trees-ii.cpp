@@ -24,6 +24,7 @@ public:
             vector<TreeNode*> right = solve(i+1,end);
             
             
+            // TreeNode* root = new TreeNode(i); // think why can't i create root node here?
             for(auto l : left){
                 for(auto r : right){
                     TreeNode* root = new TreeNode(i);
