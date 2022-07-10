@@ -32,10 +32,10 @@ public:
     if(ind==n)return;
     
     currCombination.push_back(a[ind]);
-    // target-=a[ind];
-    solve(ind,currCombination,allCombinations,a,target-a[ind]);
+    target-=a[ind];
+    solve(ind,currCombination,allCombinations,a,target);
     currCombination.pop_back();
-    // target+=a[ind];
+    target+=a[ind];
     solve(ind+1,currCombination,allCombinations,a,target);
 }
 
