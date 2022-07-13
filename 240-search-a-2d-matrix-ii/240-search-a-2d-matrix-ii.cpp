@@ -10,7 +10,7 @@ public:
             if(mat[i][j]==t)return true;
             
             if(mat[i][j]<t) i++;
-            else if(mat[i][j]>t)j--;   
+            else if(mat[i][j]>t) j--;   
         }
         return false;
     }
