@@ -9,6 +9,12 @@ public:
             if(candidate != i)votes--;
             else votes++;      
         }
-        return candidate;
+        // return candidate;
+        int ct = 0;
+        for(int i : nums){
+            if(i==candidate)ct++;
+        }
+        if(ct>nums.size()/2)return candidate;
+        return -1;
     }
 };
