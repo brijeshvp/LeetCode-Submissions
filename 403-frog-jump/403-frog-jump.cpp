@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // dp ka state = changing parameters = i and k
     // i = array index, k = last jump size
     bool solve(int i,int k,unordered_map<int,int> &mp,vector<int> &stones,unordered_map<string,bool> &dp){
         int n = stones.size();  // mp.size() == stones.size() -> since all elts mapped
@@ -30,7 +31,6 @@ public:
         for(int i=0;i<n;++i){
             mp[stones[i]] = i;
         }
-        // vector<int> dp(n,-1);
         // jump to 1th index(i=1) by making 1 jump(k=1) initially
         return solve(1,1,mp,stones,dp);
     }
