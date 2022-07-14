@@ -1,6 +1,7 @@
 class Solution {
 public:
     // FIBONACCI VARIANCE
+    // reverse fibonacci
     // recurrence relation: f(i) = f(i+1) + f(i+2)
     // #ways to reach top from i = #ways to reach top from i+1 + #ways to reach top from i+2.
     // BC: dp[n] = 1, dp[n-1] = 2
