@@ -24,20 +24,41 @@ public:
     
     
     
-    // bottom-up
+//     // bottom-up
+//     int rob(vector<int>& a) {
+//         int n = a.size();
+//         vector<int> dp(n,0);
+//         dp[0] = a[0];  
+        
+//         for(int i=1;i<n;++i){
+//             int pick = a[i];
+//             if(i-2>=0)pick+=dp[i-2];
+            
+//             int nonpick = 0 + dp[i-1];
+            
+//             dp[i] = max(pick,nonpick);
+//         }
+//         return dp[n-1];
+//     }
+    
+    
+    // bottom-up + space optimization
     int rob(vector<int>& a) {
         int n = a.size();
         vector<int> dp(n,0);
-        dp[0] = a[0];  
+        int prev1 = a[0];   // initial nonpick wala case
+        int prev2 = 0;  // initial pick wala case
         
         for(int i=1;i<n;++i){
             int pick = a[i];
-            if(i-2>=0)pick+=dp[i-2];
+            if(i-2>=0)pick+=prev2;
             
-            int nonpick = 0 + dp[i-1];
+            int nonpick = 0 + prev1;
             
-            dp[i] = max(pick,nonpick);
+            int curr = max(pick,nonpick);
+            prev2 = prev1;
+            prev1 = curr;
         }
-        return dp[n-1];
+        return prev1;
     }
 };
