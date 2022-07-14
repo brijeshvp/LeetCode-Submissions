@@ -5,7 +5,7 @@ public:
     // #ways to reach top from i = #ways to reach top from i+1 + #ways to reach top from i+2.
     // BC: dp[n] = 1, dp[n-1] = 2
     
-//     // bottom-up
+//     // bottom-up -> TC: O(n) and SC: O(n)
 //     int climbStairs(int n) {
 //         // BC
 //         if(n<=1)return n;
@@ -19,7 +19,7 @@ public:
 //         return dp[1];
 //     }
     
-    // space optimized bottom-up
+    // space optimized bottom-up -> TC: O(n) and SC: O(1)
     int climbStairs(int n) {
         // BC
         if(n<=1)return n;
