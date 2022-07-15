@@ -13,13 +13,12 @@ public:
     ListNode* reverseList(ListNode* head) {
         if(head==NULL || head->next==NULL) return head;
         
-        ListNode *p = NULL, *c = head, *n = NULL;
-        while(c){
+        ListNode *p = NULL, *c = head, *n = head->next;
+        while(c!=NULL){
             n = c->next;
             c->next = p;
             p = c;
             c = n;
-            
         }
         return p;
     }
