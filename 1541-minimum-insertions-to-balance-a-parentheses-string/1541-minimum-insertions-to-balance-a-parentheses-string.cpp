@@ -27,9 +27,7 @@ public:
                 }
             }
         }
-        // cout<<"req "<<reqOpening<<" "<<" avail "<<availableOpening<<" ";
-        // cout<<st.size();
-        moves+= 2*st.size();
+        moves+= 2*st.size();    // see test case 3(for last opening brace, we need to add 2 closing braces)
         return moves;
     }
 };
