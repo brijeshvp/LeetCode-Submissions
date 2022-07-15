@@ -15,7 +15,7 @@ public:
         if(root==NULL)return 0;
         if(dp.count(root))return dp[root];
         
-        // choice 1
+        // choice 1 -> pick curr root
         int sum1 = root->val;
         if(root->left!=NULL){
             sum1+=dfs(root->left->left,dp);
@@ -25,7 +25,7 @@ public:
             sum1+=dfs(root->right->left,dp);
             sum1+=dfs(root->right->right,dp);
         }
-        //choice 2
+        //choice 2 -> don't pick curr root
         int sum2= dfs(root->left,dp) + dfs(root->right,dp);
         
         return dp[root] = max(sum1,sum2);
