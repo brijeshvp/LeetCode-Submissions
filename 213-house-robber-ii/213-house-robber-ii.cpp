@@ -19,7 +19,8 @@ public:
         
         vector<int> dp(n,-1);
         int ans1 = solve(a,0,n-2,dp);
-        for(int i=0;i<n;++i)dp[i] = -1;
+        // for(int i=0;i<n;++i)dp[i] = -1;
+        fill(dp.begin(),dp.end(),-1);
         int ans2 = solve(a,1,n-1,dp);
         return max(ans1,ans2);
     }
