@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // variation of unique path grid problems(refer dp sheet)
     int solve(int i,int j,vector<vector<int>>& grid,vector<vector<int>> &dp){
         int m = grid.size(), n = grid[0].size();
         if(i>=m || j>=n)return INT_MAX;
