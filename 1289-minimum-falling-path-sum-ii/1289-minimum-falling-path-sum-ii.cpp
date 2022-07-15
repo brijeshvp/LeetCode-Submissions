@@ -31,7 +31,7 @@ public:
     
     int minFallingPathSum(vector<vector<int>>& grid) {
         int n = grid.size();
-        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        vector<vector<int>> dp(n,vector<int>(n,-1));
         return solve(0,grid,dp,-1);
     }
 };
