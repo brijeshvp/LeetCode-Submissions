@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // top-down striver
     bool solve(int ind,int sum,vector<int> &nums,vector<vector<int>> &dp){
         if(sum==0)return true;
         if(ind==0)return sum == nums[0];
