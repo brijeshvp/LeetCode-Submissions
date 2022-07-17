@@ -52,7 +52,7 @@ public:
     
     
     
-    // bottom-up striver
+    // bottom-up + space optimization striver
     int change(int tar, vector<int>& a) {
         int n = a.size();
         vector<int> prev(tar+1,0), curr(tar+1,0);
