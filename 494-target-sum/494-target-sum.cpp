@@ -31,12 +31,14 @@ public:
         // count #subsets with sum = s1
         
         // edge cases
-        if((target + sum)%2 == 1)return 0;  // it has to be even
+        if((sum+target<0) || (target + sum)%2 == 1)return 0;  // it has to be even
         int T = (target + sum)/2;
         // NOTE: target can be -ve -> T can be -ve -> so make inner vector of max size of target(since -ve dimension vector -> run time error)
         // consider this TC:
         // [100], target = -200
-        vector<vector<int>> dp(n,vector<int>(1001,-1));
+        
+        // or else -> write condition -> if sum - target < 0, return 0
+        vector<vector<int>> dp(n,vector<int>(T+1,-1));
         return solve(n-1,T,nums,dp);
     }
 };
