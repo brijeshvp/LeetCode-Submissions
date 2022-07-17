@@ -29,6 +29,7 @@ public:
         
         
         // approach-2 : without extra space TC: O(m+n) and SC: O(1)
+        // why else case -> think this Test case: LL1: 3 and LL2: 2->3
         ListNode *a = headA, *b = headB;
         while(a!=b){
             if(a==NULL)a = headB;
