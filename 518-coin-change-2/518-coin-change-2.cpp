@@ -27,84 +27,51 @@ public:
     
     
     
+//     // bottom-up striver
+//     int change(int tar, vector<int>& a) {
+//          int n = a.size();
+//         vector<vector<int>> dp(n+1,vector<int>(tar+1,0));
+//         // BC -> initialization
+//         for(int i=0;i<=tar;++i){
+//             if(i%a[0]==0)dp[0][i] = 1;
+//             else dp[0][i] = 0;
+//         }
+//         for(int i=1;i<n;++i){
+//             for(int j=0;j<=tar;++j){
+//                 int nottake = dp[i-1][j];
+//                 int take = 0;
+//                 if(a[i]<=j)take = dp[i][j-a[i]];
+
+//                 dp[i][j] = take + nottake;
+//             }
+//         }
+//         return dp[n-1][tar];
+//     }
+    
+    
+    
+    
+    
     // bottom-up striver
     int change(int tar, vector<int>& a) {
-         int n = a.size();
-        vector<vector<int>> dp(n+1,vector<int>(tar+1,0));
+        int n = a.size();
+        vector<int> prev(tar+1,0), curr(tar+1,0);
         // BC -> initialization
         for(int i=0;i<=tar;++i){
-            if(i%a[0]==0)dp[0][i] = 1;
-            else dp[0][i] = 0;
+            if(i%a[0]==0)prev[i] = 1;
+            else prev[i] = 0;
         }
+        
         for(int i=1;i<n;++i){
             for(int j=0;j<=tar;++j){
-                int nottake = dp[i-1][j];
+                int nottake = prev[j];
                 int take = 0;
-                if(a[i]<=j)take = dp[i][j-a[i]];
+                if(a[i]<=j)take = curr[j-a[i]];
 
-                dp[i][j] = take + nottake;
+                curr[j] = take + nottake;
             }
+            prev = curr;
         }
-        return dp[n-1][tar];
+        return prev[tar];
     }
-    
-    
-    
-    
-    
-    
-    // // bottom-up striver
-// int findWays(vector<int> &a, int tar)
-// {
-//     int n = a.size();
-//     vector<vector<int>> dp(n+1,vector<int>(tar+1,0));
-//     // BC -> initialization
-//     for(int i=0;i<=tar;++i){
-//         if(i==0 && a[0]==0)dp[0][i] = 2;
-//         else if((i==0 && a[0]!=0) || a[0]==i)dp[0][i] = 1;
-//     }
-//     for(int i=0;i<n;++i)dp[i][0] = 1;
-    
-//     for(int i=1;i<n;++i){
-//         for(int j=1;j<=tar;++j){
-//             int nottake = dp[i-1][j];
-//             int take = 0;
-//             if(a[i]<=j)take = dp[i-1][j-a[i]];
-            
-//             dp[i][j] = take + nottake;
-//         }
-//     }
-//     return dp[n-1][tar];
-// }
-
-
-
-
-
-
-// // bottom-up + space optimization striver
-// int findWays(vector<int> &a, int tar)
-// {
-//     int n = a.size();
-//     vector<int> prev(tar+1,0), curr(tar+1,0);
-//     // BC -> initialization
-//     for(int i=0;i<=tar;++i){
-//         if(i==0 && a[0]==0)prev[i] = 2;
-//         else if((i==0 && a[0]!=0) || a[0]==i)prev[i] = 1;
-//     }
-//     prev[0] = 1;
-//     curr[0] = 1;
-    
-//     for(int i=1;i<n;++i){
-//         for(int j=1;j<=tar;++j){
-//             int nottake = prev[j];
-//             int take = 0;
-//             if(a[i]<=j)take = prev[j-a[i]];
-            
-//             curr[j] = take + nottake;
-//         }
-//         prev = curr;
-//     }
-//     return prev[tar];
-// }
 };
