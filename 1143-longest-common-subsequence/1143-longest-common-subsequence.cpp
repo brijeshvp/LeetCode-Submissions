@@ -47,7 +47,7 @@ public:
     // TC: O(m*n) and SC: O(2n)
     int longestCommonSubsequence(string text1, string text2) {
         int m = text1.size(), n = text2.size();
-        vector<int> prev(n+1,0),curr(n+1,0);
+        vector<int> prev(n+1,0),curr(n+1,0);    // size of both arrays should be = row size of 2D dp matrix = n+1
         // BC -> initialization
         // for(int i=0;i<=m;++i)dp[i][0] = 0;
         for(int i=0;i<=n;++i)prev[i] = 0;
