@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // recursive TC: O(2^m * 2^n) -> all subseq of string a * all subseq of string b
+    
     // top-down striver
     // TC: O(m*n) and SC: O(m*n + m+n) -> dp array + call stack space
     int solve(int m,int n,string &a,string &b,vector<vector<int>> &dp){
