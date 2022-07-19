@@ -61,31 +61,58 @@ public:
     
     
     
-    // bottom-up + space-optimization-1 striver
-    // TC: O(2n) and SC: O(4)
+//     // bottom-up + space-optimization-1 striver
+//     // TC: O(2n) and SC: O(4)
+//     int maxProfit(vector<int>& prices) {
+//         int n = prices.size();
+//         vector<int> next(2,0), curr(2,0);
+        
+//         next[0] = next[1] = 0;
+        
+//         for(int ind=n-1;ind>=0;--ind){
+//             for(int canBuy=0;canBuy<=1;++canBuy){
+//                 int profit = 0;
+//                 if(canBuy){
+//                     int buy = -prices[ind] + next[0];
+//                     int notbuy = 0 + next[1];
+//                     profit = max(buy,notbuy);
+//                 }
+//                 else{
+//                     int sell = prices[ind] + next[1];
+//                     int notsell = 0 + next[0];
+//                     profit = max(sell,notsell);
+//                 }
+//                 curr[canBuy] = profit;
+//             }
+//             next = curr;
+//         }
+//         return next[1];    // at 0th ind -> we can always buy -> 2nd parameter = 1, also we run from n-1 to 0 -> so at last we return dp[0][1]
+//     }
+    
+    
+    
+    
+    
+    // bottom-up + space-optimization-2 striver
+    // TC: O(2n) and SC: O(4) -> 4 variables instead of 2 1D arrays of 2 size
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        vector<int> next(2,0), curr(2,0);
+        int nextNotBuy, nextBuy, currNotBuy, currBuy;
         
-        next[0] = next[1] = 0;
+        nextNotBuy = nextBuy = 0;
         
         for(int ind=n-1;ind>=0;--ind){
-            for(int canBuy=0;canBuy<=1;++canBuy){
-                int profit = 0;
-                if(canBuy){
-                    int buy = -prices[ind] + next[0];
-                    int notbuy = 0 + next[1];
-                    profit = max(buy,notbuy);
-                }
-                else{
-                    int sell = prices[ind] + next[1];
-                    int notsell = 0 + next[0];
-                    profit = max(sell,notsell);
-                }
-                curr[canBuy] = profit;
-            }
-            next = curr;
+            int buy = -prices[ind] + nextNotBuy;
+            int notbuy = 0 + nextBuy;
+            currBuy = max(buy,notbuy);
+
+            int sell = prices[ind] + nextBuy;
+            int notsell = 0 + nextNotBuy;
+            currNotBuy = max(sell,notsell);
+            
+            nextNotBuy = currNotBuy;
+            nextBuy = currBuy;
         }
-        return next[1];    // at 0th ind -> we can always buy -> 2nd parameter = 1, also we run from n-1 to 0 -> so at last we return dp[0][1]
+        return nextBuy;    // at 0th ind -> we can always buy -> 2nd parameter = 1, also we run from n-1 to 0 -> so at last we return dp[0][1]
     }
 };
