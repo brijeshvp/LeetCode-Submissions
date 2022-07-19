@@ -1,6 +1,9 @@
 class Solution {
 public:
+    // 3d dp
+    
     // top-down striver
+    // TC: O(n*2*3) and SC: O(n*2*3) + O(n) -> dp array + call stack
     int solve(int ind,int canBuy,int capacity,vector<int> &prices,vector<vector<vector<int>>> &dp){
         int n = prices.size();
         if(ind==n || capacity==0)return 0;
