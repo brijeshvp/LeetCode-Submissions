@@ -46,25 +46,53 @@ public:
     
     
     
-    // bottom-up + space-optimization-1 striver
+//     // bottom-up + space-optimization-1 striver
+//     int numDistinct(string s, string t) {
+//         int m = s.size(), n = t.size();
+//         // NOTE:- must take dp matrix in double bcoz of overflow issues in some test cases -> even will not fit in long long
+//         // smart trick -> calculate in double and return ans at last in int
+//         vector<double> prev(n+1,0), curr(n+1,0);
+//         // BC -> initialization
+//         prev[0] = curr[0] = 1;
+//         // omit j = 0 in below loop since for every j = 0 -> dp[i][j] = 1(above loop)
+//         for(int j=1;j<=n;++j)prev[j] = 0;
+        
+//         for(int i=1;i<=m;++i){
+//             for(int j=1;j<=n;++j){
+//                 if(s[i-1]==t[j-1]){
+//                     curr[j] = prev[j-1] + prev[j];
+//                 }
+//                 else curr[j] = prev[j];
+//             }
+//             prev = curr;
+//         }
+//         return (int)prev[n];
+//     }
+    
+    
+    
+    
+    
+    
+    // bottom-up + space-optimization-2 striver
     int numDistinct(string s, string t) {
         int m = s.size(), n = t.size();
         // NOTE:- must take dp matrix in double bcoz of overflow issues in some test cases -> even will not fit in long long
         // smart trick -> calculate in double and return ans at last in int
-        vector<double> prev(n+1,0), curr(n+1,0);
+        vector<double> prev(n+1,0);
         // BC -> initialization
-        prev[0] = curr[0] = 1;
+        prev[0] = 1;
         // omit j = 0 in below loop since for every j = 0 -> dp[i][j] = 1(above loop)
         for(int j=1;j<=n;++j)prev[j] = 0;
         
         for(int i=1;i<=m;++i){
-            for(int j=1;j<=n;++j){
+            // run loop from backwards for single 1D array optimization
+            for(int j=n;j>=1;--j){
                 if(s[i-1]==t[j-1]){
-                    curr[j] = prev[j-1] + prev[j];
+                    prev[j] = prev[j-1] + prev[j];
                 }
-                else curr[j] = prev[j];
+                else prev[j] = prev[j];
             }
-            prev = curr;
         }
         return (int)prev[n];
     }
