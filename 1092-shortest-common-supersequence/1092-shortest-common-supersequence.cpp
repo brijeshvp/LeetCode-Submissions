@@ -28,6 +28,7 @@ public:
                 ans.push_back(str1[i-1]);
                 i--;
             }
+            // don't write else if(dp[i][j-1]>dp[i-1][j]) here -> bcoz it might be case when both are equal -> in that case no condition will be executed and will get TLE
             else{
                 ans.push_back(str2[j-1]);
                 j--;
