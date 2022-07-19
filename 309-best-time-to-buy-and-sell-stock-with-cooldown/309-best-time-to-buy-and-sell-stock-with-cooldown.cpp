@@ -82,6 +82,7 @@ public:
             next2 = next1;
             next1 = curr;
         }
+        // return next1 or curr
         return next1[1];    // at 0th ind -> we can always buy -> 2nd parameter = 1, also we run from n-1 to 0 -> so at last we return dp[0][1]
     }
 };
