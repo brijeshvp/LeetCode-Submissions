@@ -22,6 +22,8 @@ public:
     // bottom-up striver
     int numDistinct(string s, string t) {
         int m = s.size(), n = t.size();
+        // NOTE:- must take dp matrix in double bcoz of overflow issues in some test cases -> even will not fit in long long
+        // smart trick -> calculate in double and return ans at last in int
         vector<vector<double>> dp(m+1,vector<double>(n+1,0));
         // BC -> initialization
         for(int i=0;i<=m;++i)dp[i][0] = 1;
