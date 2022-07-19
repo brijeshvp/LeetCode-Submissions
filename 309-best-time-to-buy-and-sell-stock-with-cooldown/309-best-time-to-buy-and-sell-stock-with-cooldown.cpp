@@ -85,4 +85,9 @@ public:
         // return next1[1] or curr[1]
         return next1[1];    // at 0th ind -> we can always buy -> 2nd parameter = 1, also we run from n-1 to 0 -> so at last we return dp[0][1]
     }
+    
+    
+    
+    
+    // NOTE:- space optimization-2 version of stocks-2 have 4 variables, so here due to ind+2 -> we have to maintain 6 variables -> will not be clean code -> avoid
 };
