@@ -84,4 +84,8 @@ public:
         }
         return prev[n];
     }
+    
+    
+    
+    // single 1D array space optimization not possible bcoz -> in else case of for loops -> for current state of curr array -> we depend on prev state of prev array as well as prev state of curr array   -> both arrays required
 };
