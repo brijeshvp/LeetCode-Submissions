@@ -8,8 +8,8 @@ public:
         
         int mx = 0;
         for(int i=1;i<n;++i){
+            mx = max(mx,p[i]-prefMin[i-1]);
             prefMin[i] = min(prefMin[i-1],p[i]);
-            mx = max(mx,p[i]-prefMin[i]);
         }
         
         // int mx = 0;
