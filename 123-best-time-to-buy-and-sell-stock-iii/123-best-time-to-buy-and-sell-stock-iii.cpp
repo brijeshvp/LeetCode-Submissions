@@ -123,7 +123,7 @@ public:
     
     // method-2 2d DP striver
     // top-down striver
-    // TC: O(n*2*3) and SC: O(n*2*3) + O(n) -> dp array + call stack
+    // TC: O(n*4) and SC: O(n*4) + O(n) -> dp array + call stack
     int solve(int ind,int transactions,vector<int> &prices,vector<vector<int>> &dp){
         int n = prices.size();
         if(ind==n || transactions==4)return 0;
