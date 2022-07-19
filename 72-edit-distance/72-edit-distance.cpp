@@ -28,27 +28,60 @@ public:
     
     
     
+//     // bottom-up striver
+//     int minDistance(string word1, string word2) {
+//         int m = word1.size(), n = word2.size();
+//         vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+//         // BC -> to initialization
+//         for(int j=0;j<=n;++j)dp[0][j] = j;
+//         for(int i=0;i<=m;++i)dp[i][0] = i;
+        
+//         for(int i=1;i<=m;++i){
+//             for(int j=1;j<=n;++j){
+//                 if(word1[i-1]==word2[j-1])dp[i][j] = 0 + dp[i-1][j-1];  // no ops needed
+//                 else{
+//                     // hypothetical operations
+//                     int ins = 1 + dp[i][j-1];     // insert operation
+//                     int del = 1 + dp[i-1][j];     // delete operation
+//                     int rep = 1 + dp[i-1][j-1];     // replace operation
+
+//                     dp[i][j] = min({ins,del,rep});
+//                 }
+//             }
+//         }
+//         return dp[m][n];
+//     }
     
+    
+    
+    
+    
+    
+    // bottom-up + space-optimization striver
     int minDistance(string word1, string word2) {
         int m = word1.size(), n = word2.size();
-        vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+        vector<int> prev(n+1,0), curr(n+1,0);
         // BC -> to initialization
-        for(int j=0;j<=n;++j)dp[0][j] = j;
-        for(int i=0;i<=m;++i)dp[i][0] = i;
+        // for(int j=0;j<=n;++j)dp[0][j] = j;
+        for(int j=0;j<=n;++j)prev[j] = j;
+        // for(int i=0;i<=m;++i)dp[i][0] = i;   -> for every i -> we need to put 0th elt of curr = i; -> so lets put 0th elt 0f curr for i = 0 here, then for every i, we will put 0th elt of curr in loops(refer below)
+        curr[0] = 0;
         
         for(int i=1;i<=m;++i){
+            curr[0] = i;    // BC-2 has to be covered
             for(int j=1;j<=n;++j){
-                if(word1[i-1]==word2[j-1])dp[i][j] = 0 + dp[i-1][j-1];  // no ops needed
+                if(word1[i-1]==word2[j-1])curr[j] = 0 + prev[j-1];  // no ops needed
                 else{
                     // hypothetical operations
-                    int ins = 1 + dp[i][j-1];     // insert operation
-                    int del = 1 + dp[i-1][j];     // delete operation
-                    int rep = 1 + dp[i-1][j-1];     // replace operation
+                    int ins = 1 + curr[j-1];     // insert operation
+                    int del = 1 + prev[j];     // delete operation
+                    int rep = 1 + prev[j-1];     // replace operation
 
-                    dp[i][j] = min({ins,del,rep});
+                    curr[j] = min({ins,del,rep});
                 }
             }
+            prev = curr;
         }
-        return dp[m][n];
+        return prev[n];
     }
 };
