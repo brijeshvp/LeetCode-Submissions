@@ -41,12 +41,12 @@ public:
             for(int canBuy=0;canBuy<=1;++canBuy){
                 int profit = 0;
                 if(canBuy){
-                    int buy = -prices[ind] - fee + dp[ind+1][0];
+                    int buy = -prices[ind]  + dp[ind+1][0];
                     int notbuy = 0 + dp[ind+1][1];
                     profit = max(buy,notbuy);
                 }
                 else{
-                    int sell = prices[ind] + dp[ind+1][1];
+                    int sell = prices[ind] - fee + dp[ind+1][1];
                     int notsell = 0 + dp[ind+1][0];
                     profit = max(sell,notsell);
                 }
