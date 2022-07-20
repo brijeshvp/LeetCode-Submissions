@@ -71,21 +71,65 @@ public:
     
     
     // method-2 striver -> 1D DP
-    // bottom-up + space-optimization striver
-    // TC: O(n*n) and SC: O(2n)
+//     // bottom-up striver
+//     // TC: O(n*n) and SC: O(n)
+//     int lengthOfLIS(vector<int>& a) {        
+//         int n = a.size();
+        
+//         vector<int> dp(n,1);
+        
+//         int mx = 1;
+//         for(int ind=0;ind<n;++ind){
+//             for(int prev=0;prev<ind;++prev){
+//                 if(a[prev]<a[ind] && dp[ind]<1+dp[prev]) dp[ind] = 1 + dp[prev];
+//             }
+//             mx = max(mx,dp[ind]);
+//         }
+        
+//         return mx;
+ 
+//     }
+    
+    
+    
+    
+    
+    
+    // bottom-up + store LIS striver
+    // TC: O(n*n + len(LIS)) and SC: O(n)
     int lengthOfLIS(vector<int>& a) {        
         int n = a.size();
         
         vector<int> dp(n,1);
+        vector<int> hsh(n);
         
         int mx = 1;
+        int lastIndOfLIS = 0;
         for(int ind=0;ind<n;++ind){
+            hsh[ind] = ind;
             for(int prev=0;prev<ind;++prev){
-                if(a[prev]<a[ind] && dp[ind]<1+dp[prev]) dp[ind] = 1 + dp[prev];
+                if(a[prev]<a[ind] && dp[ind]<1+dp[prev]){
+                    dp[ind] = 1 + dp[prev];
+                    hsh[ind] = prev;
+                }
             }
-            mx = max(mx,dp[ind]);
+            if(dp[ind]>mx){
+                mx = dp[ind];
+                lastIndOfLIS = ind;
+            }
         }
         
+        vector<int> LIS;
+        LIS.push_back(a[lastIndOfLIS]);
+        while(lastIndOfLIS != hsh[lastIndOfLIS]){
+            lastIndOfLIS = hsh[lastIndOfLIS];
+            LIS.push_back(a[lastIndOfLIS]);
+        }
+        
+        reverse(LIS.begin(),LIS.end());
+        
+        // for(int i : LIS)cout<<i<<" ";
+        // cout<<endl;
         return mx;
  
     }
