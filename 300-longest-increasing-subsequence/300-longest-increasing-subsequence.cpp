@@ -22,22 +22,47 @@ public:
     
     
     
-    // bottom-up striver
-    // TC: O(n*n) and SC: O(n*n)
+//     // bottom-up striver
+//     // TC: O(n*n) and SC: O(n*n)
+//     int lengthOfLIS(vector<int>& a) {        
+//         int n = a.size();
+//         vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        
+//         for(int ind=n-1;ind>=0;--ind){
+//             for(int prev=n-1;prev>=-1;--prev){
+//                 int nottake = 0 + dp[ind+1][prev+1];    // 2nd parameter -> prev+1 -> since prev can be -1
+//                 int take = 0;
+//                 if(prev==-1 || a[ind]>a[prev])take = 1 + dp[ind+1][ind+1];  // 2nd parameter -> prev+1 -> since prev can be -1
+//                 dp[ind][prev+1] = max(take,nottake);    // 2nd parameter -> prev+1 -> since prev can be -1
+//             }
+//         }
+//         // 2nd parameter -> prev+1 -> since prev can be -1
+//         // our final ans = dp[0][-1] -> so return dp[0][0] -> since prev = -1 -> shifted to prev = 0
+//         return dp[0][0];    
+//     }
+    
+    
+    
+    
+    
+    
+    // bottom-up + space-optimization striver
+    // TC: O(n*n) and SC: O(2n)
     int lengthOfLIS(vector<int>& a) {        
         int n = a.size();
-        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        vector<int> next(n+1,0), curr(n+1,0);
         
         for(int ind=n-1;ind>=0;--ind){
             for(int prev=n-1;prev>=-1;--prev){
-                int nottake = 0 + dp[ind+1][prev+1];    // 2nd parameter -> prev+1 -> since prev can be -1
+                int nottake = 0 + next[prev+1];    // 2nd parameter -> prev+1 -> since prev can be -1
                 int take = 0;
-                if(prev==-1 || a[ind]>a[prev])take = 1 + dp[ind+1][ind+1];  // 2nd parameter -> prev+1 -> since prev can be -1
-                dp[ind][prev+1] = max(take,nottake);    // 2nd parameter -> prev+1 -> since prev can be -1
+                if(prev==-1 || a[ind]>a[prev])take = 1 + next[ind+1];  // 2nd parameter -> prev+1 -> since prev can be -1
+                curr[prev+1] = max(take,nottake);    // 2nd parameter -> prev+1 -> since prev can be -1
             }
+            next = curr;
         }
         // 2nd parameter -> prev+1 -> since prev can be -1
         // our final ans = dp[0][-1] -> so return dp[0][0] -> since prev = -1 -> shifted to prev = 0
-        return dp[0][0];    
+        return next[0];    
     }
 };
