@@ -94,43 +94,66 @@ public:
     
     
     
+//     // method-2
+//     // bottom-up + store LIS striver
+//     // TC: O(n*n + len(LIS)) and SC: O(n)
+//     int lengthOfLIS(vector<int>& a) {        
+//         int n = a.size();
+        
+//         vector<int> dp(n,1);
+//         vector<int> hsh(n);
+        
+//         int mx = 1;
+//         int lastIndOfLIS = 0;
+//         for(int ind=0;ind<n;++ind){
+//             hsh[ind] = ind;
+//             for(int prev=0;prev<ind;++prev){
+//                 if(a[prev]<a[ind] && dp[ind]<1+dp[prev]){
+//                     dp[ind] = 1 + dp[prev];
+//                     hsh[ind] = prev;
+//                 }
+//             }
+//             if(dp[ind]>mx){
+//                 mx = dp[ind];
+//                 lastIndOfLIS = ind;
+//             }
+//         }
+        
+//         vector<int> LIS;
+//         LIS.push_back(a[lastIndOfLIS]);
+//         while(lastIndOfLIS != hsh[lastIndOfLIS]){
+//             lastIndOfLIS = hsh[lastIndOfLIS];
+//             LIS.push_back(a[lastIndOfLIS]);
+//         }
+        
+//         reverse(LIS.begin(),LIS.end());
+        
+//         // for(int i : LIS)cout<<i<<" ";
+//         // cout<<endl;
+//         return mx;
+ 
+//     }
     
-    // bottom-up + store LIS striver
-    // TC: O(n*n + len(LIS)) and SC: O(n)
+    
+    
+    
+    // method-3 -> Binary Search approach striver
+    // TC: O(NlogN) and SC: O(N) 
+    // NOTE: this approach will give us the length of LIS and cannot help us to get actual LIS in temp array
     int lengthOfLIS(vector<int>& a) {        
         int n = a.size();
         
-        vector<int> dp(n,1);
-        vector<int> hsh(n);
-        
-        int mx = 1;
-        int lastIndOfLIS = 0;
-        for(int ind=0;ind<n;++ind){
-            hsh[ind] = ind;
-            for(int prev=0;prev<ind;++prev){
-                if(a[prev]<a[ind] && dp[ind]<1+dp[prev]){
-                    dp[ind] = 1 + dp[prev];
-                    hsh[ind] = prev;
-                }
-            }
-            if(dp[ind]>mx){
-                mx = dp[ind];
-                lastIndOfLIS = ind;
+        vector<int> temp;
+        temp.push_back(a[0]);
+        for(int i=1;i<n;++i){
+            if(a[i]>temp.back())temp.push_back(a[i]);
+            else{
+                int ind = lower_bound(temp.begin(),temp.end(),a[i]) - temp.begin();
+                temp[ind] = a[i];
             }
         }
         
-        vector<int> LIS;
-        LIS.push_back(a[lastIndOfLIS]);
-        while(lastIndOfLIS != hsh[lastIndOfLIS]){
-            lastIndOfLIS = hsh[lastIndOfLIS];
-            LIS.push_back(a[lastIndOfLIS]);
-        }
-        
-        reverse(LIS.begin(),LIS.end());
-        
-        // for(int i : LIS)cout<<i<<" ";
-        // cout<<endl;
-        return mx;
- 
+        return temp.size();
     }
+    
 };
