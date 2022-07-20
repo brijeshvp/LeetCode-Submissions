@@ -148,6 +148,8 @@ public:
         for(int i=1;i<n;++i){
             if(a[i]>temp.back())temp.push_back(a[i]);
             else{
+                // dry run test case-2 -> to understand why we have taken lower_bound and not upper_bound
+                // bcoz we want to overwrite -> same elt also if available in temp
                 int ind = lower_bound(temp.begin(),temp.end(),a[i]) - temp.begin();
                 temp[ind] = a[i];
             }
