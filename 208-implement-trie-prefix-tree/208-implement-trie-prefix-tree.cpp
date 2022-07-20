@@ -26,6 +26,7 @@ public:
         root = new Node();
     }
     
+    // TC: O(word.size)
     void insert(string word) {
         Node *node = root;  // node to iterate in trie
         int n = word.size();
@@ -38,6 +39,7 @@ public:
         node->flag = true;
     }
     
+    // TC: O(word.size)
     bool search(string word) {
         Node *node = root;  // node to iterate in trie
         int n = word.size();
@@ -50,6 +52,7 @@ public:
         return node->flag;
     }
     
+    // TC: O(prefix.size)
     bool startsWith(string prefix) {
         Node *node = root;  // node to iterate in trie
         int n = prefix.size();
