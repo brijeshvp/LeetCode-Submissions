@@ -1,8 +1,8 @@
 class Solution {
 public:
-    pair<int,int> squareToCell(int cellNo,int boardSize){
-        int row = (cellNo-1)/boardSize;
-        int col = (cellNo-1)%boardSize;
+    pair<int,int> squareToCell(int squareNo,int boardSize){
+        int row = (squareNo-1)/boardSize;
+        int col = (squareNo-1)%boardSize;
         if(row%2 == 1){
             col = (boardSize-1) - col;
         }
@@ -30,7 +30,7 @@ public:
                 
                 if(board[row][col]!=-1)nextNode = board[row][col];
                 
-                if(nextNode == n*n)return dist+1;
+                if(nextNode == n*n)return dist+1;   // +1 to jump to n*n final node
                 
                 if(!vis.count(nextNode)){
                     vis.insert(nextNode);
