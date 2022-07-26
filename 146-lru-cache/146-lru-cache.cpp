@@ -1,6 +1,5 @@
 class LRUCache {
 public:
-    // cache = map (since storing key, value pairs)
     map<int,int> cache;
     map<int,list<int>::iterator> address;
     list<int> dll;
@@ -13,37 +12,50 @@ public:
     }
     
     int get(int key) {
-        if(cache.find(key)==cache.end())return -1;
+        if(!cache.count(key))return -1;
         
         dll.erase(address[key]);
         dll.push_front(key);
-        address.erase(key);
         address[key] = dll.begin();
         
         return cache[key];
     }
     
     void put(int key, int value) {
-        if(cache.find(key)!=cache.end()){
-            dll.erase(address[key]);
-            address.erase(key);
-            cache.erase(key);
-            siz--;
-        }
-        
         if(siz==cap){
-            int toDel = dll.back();
-            dll.pop_back();
-            address.erase(toDel);
-            cache.erase(toDel);
-            siz--;
+            if(cache.count(key)){
+                dll.erase(address[key]);
+                dll.push_front(key);
+                address[key] = dll.begin();
+                cache[key] = value;
+            } 
+            else{
+                int toDel = dll.back();
+                cache.erase(toDel);
+                dll.erase(address[toDel]);
+                address.erase(toDel);
+                
+                dll.push_front(key);
+                address[key] = dll.begin();
+                cache[key] = value;
+            }
         }
-        
-        cache[key] = value;
-        dll.push_front(key);
-        address[key] = dll.begin();
-        siz++;
+        else{
+            if(cache.count(key)){
+                dll.erase(address[key]);
+                dll.push_front(key);
+                address[key] = dll.begin();
+                cache[key] = value;
+            }
+            else{
+                siz++;
+                cache[key] = value;
+                dll.push_front(key);
+                address[key] = dll.begin();
+            }
+        }
     }
+    
 };
 
 /**
