@@ -71,24 +71,25 @@ public:
     
     
     // method-2 striver -> 1D DP
-//     // bottom-up striver
-//     // TC: O(n*n) and SC: O(n)
-//     int lengthOfLIS(vector<int>& a) {        
-//         int n = a.size();
+    // bottom-up striver
+    // TC: O(n*n) and SC: O(n)
+    int lengthOfLIS(vector<int>& a) {        
+        int n = a.size();
         
-//         vector<int> dp(n,1);
+        vector<int> dp(n,1);
+        dp[0] = 1;
         
-//         int mx = 1;
-//         for(int ind=0;ind<n;++ind){
-//             for(int prev=0;prev<ind;++prev){
-//                 if(a[prev]<a[ind] && dp[ind]<1+dp[prev]) dp[ind] = 1 + dp[prev];
-//             }
-//             mx = max(mx,dp[ind]);
-//         }
+        int mx = 1;
+        for(int ind=0;ind<n;++ind){
+            for(int prev=0;prev<ind;++prev){
+                if(a[prev]<a[ind] && dp[ind]<1+dp[prev]) dp[ind] = 1 + dp[prev];
+            }
+            mx = max(mx,dp[ind]);
+        }
         
-//         return mx;
+        return mx;
  
-//     }
+    }
     
     
     
@@ -137,25 +138,25 @@ public:
     
     
     
-    // method-3 -> Binary Search approach striver
-    // TC: O(NlogN) and SC: O(N) 
-    // NOTE: this approach will give us the length of LIS and cannot help us to get actual LIS in temp array
-    int lengthOfLIS(vector<int>& a) {        
-        int n = a.size();
+//     // method-3 -> Binary Search approach striver(best approach)
+//     // TC: O(NlogN) and SC: O(N) 
+//     // NOTE: this approach will give us the length of LIS and cannot help us to get actual LIS in temp array
+//     int lengthOfLIS(vector<int>& a) {        
+//         int n = a.size();
         
-        vector<int> temp;
-        temp.push_back(a[0]);
-        for(int i=1;i<n;++i){
-            if(a[i]>temp.back())temp.push_back(a[i]);
-            else{
-                // dry run test case-2 -> to understand why we have taken lower_bound and not upper_bound
-                // bcoz we want to overwrite -> same elt also if available in temp
-                int ind = lower_bound(temp.begin(),temp.end(),a[i]) - temp.begin();
-                temp[ind] = a[i];
-            }
-        }
+//         vector<int> temp;
+//         temp.push_back(a[0]);
+//         for(int i=1;i<n;++i){
+//             if(a[i]>temp.back())temp.push_back(a[i]);
+//             else{
+//                 // dry run test case-2 -> to understand why we have taken lower_bound and not upper_bound
+//                 // bcoz we want to overwrite -> same elt also if available in temp
+//                 int ind = lower_bound(temp.begin(),temp.end(),a[i]) - temp.begin();
+//                 temp[ind] = a[i];
+//             }
+//         }
         
-        return temp.size();
-    }
+//         return temp.size();
+//     }
     
 };
