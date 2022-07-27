@@ -80,7 +80,7 @@ public:
         dp[0] = 1;
         
         int mx = 1;
-        for(int ind=0;ind<n;++ind){
+        for(int ind=1;ind<n;++ind){
             for(int prev=0;prev<ind;++prev){
                 if(a[prev]<a[ind] && dp[ind]<1+dp[prev]) dp[ind] = 1 + dp[prev];
             }
