@@ -1,44 +1,47 @@
 class Solution {
 public:
-    static bool cmp(string s1,string s2){
-        return s1.size()>s2.size();    
+   // LIS variation
+    bool check(string &a,string &b){
+        // if size diff is not 1 then return false -> can't be part of chain
+        if(a.size() != b.size() + 1)return false;
+        
+        // NOTE: a is bigger string and b is smaller string
+        int i = 0, j = 0;
+        while(i<a.size()){
+            if(a[i]==b[j]){
+                i++;
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+        
+        if(i==a.size() && j==b.size())return true;
+        return false;
+    }
+    
+    bool static comp(string a,string b){
+        return a.size() < b.size();
     }
     
     int longestStrChain(vector<string>& w) {
-        vector<string> temp = {"a","ab","ac","bd","abc","abd","abdd"};
-        if(w == temp)return 4;
-        
-        int n = w.size();
-        map<string,int> mp;
-        for(int i=0;i<n;++i){
-            mp[w[i]]++;
-        }
-        
-        sort(w.begin(),w.end(),cmp);
-        
-        // for(int i=0;i<n;++i)cout<<w[i]<<endl;
+       int n = w.size();
+        sort(w.begin(),w.end(),comp);
+        vector<int> dp(n,1);
         
         int mx = 1;
-        for(int i=n-1;i>=0;--i){
-            string s = w[i];
-            
-            int ans = 1;
-            bool flag = true;
-            while(flag){
-                bool flag2 = false;
-                for(int j=0;j<s.size();++j){
-                    string sub = s.substr(0,j) + s.substr(j+1);
-                    if(mp.find(sub)!=mp.end()){
-                        ans++;
-                        mx = max(mx,ans);
-                        s = sub;
-                        flag2 = true;
-                        break;
-                    }
+        for(int ind=0;ind<n;++ind){
+            for(int prev=0;prev<ind;++prev){
+                if(check(w[ind],w[prev]) && dp[ind]<1+dp[prev]){
+                    dp[ind] = 1 + dp[prev];
                 }
-                if(!flag2)flag = false;
+            }
+            if(dp[ind]>mx){
+                mx = dp[ind];
             }
         }
+        
         return mx;
     }
 };
