@@ -20,10 +20,6 @@ public:
         left = max(0,solve(root->left));
         right = max(0,solve(root->right));
         
-        // mx = max(mx,1LL*root->val);
-        // mx = max(mx,max(left,right)+1LL*root->val);
-        // mx = max(mx,left+right+root->val);
-        // mx = max(mx,max({root->val,max(left,right)+root->val,left+right+root->val}));
         mx = max(mx,left+right+root->val);
         
         return max(left,right) + root->val;
