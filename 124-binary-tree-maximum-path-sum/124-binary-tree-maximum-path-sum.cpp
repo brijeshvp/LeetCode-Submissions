@@ -14,7 +14,7 @@ public:
     // extension of diameter of a tree
     int mx = INT_MIN;
     int solve(TreeNode* root){
-        if(!root)return INT_MIN;
+        if(!root)return 0;
         
         int left, right;
         left = max(0,solve(root->left));
