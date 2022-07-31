@@ -32,12 +32,12 @@ public:
             if(node->right)q.push({node->right,{horDist+1,vertDist+1}});
         }
         
-        for(auto &it : mp){
-            vector<int> col;
-            for(auto &i : it.second){
-                for(int val : i.second)col.push_back(val);
+        for(auto &col : mp){
+            vector<int> column;
+            for(auto &row : col.second){
+                for(int val : row.second)column.push_back(val);
             }
-            res.push_back(col);
+            res.push_back(column);
         }
         
         return res;
