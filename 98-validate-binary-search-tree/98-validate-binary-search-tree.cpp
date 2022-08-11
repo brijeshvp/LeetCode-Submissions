@@ -9,6 +9,10 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
+// https://cplusplus.com/forum/general/85183/#:~:text=You%20can%20simply%20pass%20the%20pointer%20by%20reference,reference%20to%20a%20pointer%20to%20a%20node%20type%29.
+// geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/
 class Solution {
 public:
     bool solve(TreeNode *root, TreeNode *&prev){
