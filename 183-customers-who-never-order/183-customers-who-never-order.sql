@@ -6,4 +6,4 @@
 # SELECT A.Name as Customers from Customers A WHERE NOT EXISTS (SELECT 1 FROM Orders B WHERE A.Id = B.CustomerId)
 
 # using join
-SELECT A.Name as Customers from Customers A LEFT JOIN Orders B on  A.Id = B.CustomerId WHERE B.CustomerId is NULL
+SELECT name as Customers from Customers LEFT JOIN Orders on  Customers.id = CustomerId WHERE CustomerId is NULL
