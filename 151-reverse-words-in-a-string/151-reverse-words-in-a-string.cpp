@@ -1,41 +1,34 @@
 class Solution {
 public:
-    string reverseWords(string s) {
-        // hello world
-        // reversed = “world hello”;
-        // helper = “world”
-
-        // step-1 -> reverse string word by word
-        string reversed="", helper="";
-        for(int i=0;i<s.size();++i){
-            if(s[i]!=' '){
-                helper+=s[i];
-            }
-            else{
-                if(reversed=="")reversed = helper + reversed;
-                else reversed = helper + " " + reversed;
-                helper = "";
-            }
+    // function to reverse any part of string from i to j (just one word or entire string)
+    void reverseword(string &s, int i, int j){
+        while(i<j){
+          char t=s[i];
+          s[i++]=s[j];
+          s[j--]=t;
+        } 
+    }
+    
+    string reverseWords(string &s) {
+        
+        int i=0, j=0;
+        int l=0;
+        int len=s.length();
+        int wordcount=0;
+        
+        while(true){
+            while(i<len && s[i] == ' ') i++;  // skip spaces in front of the word
+            if(i==len) break;
+            if(wordcount) s[j++]=' ';
+            l=j;
+            while(i<len && s[i] != ' ') {s[j]=s[i]; j++; i++;} 
+            reverseword(s,l,j-1);                // reverse word in place
+            wordcount++;
+            
         }
-        if(reversed=="")reversed = helper + reversed;
-        else reversed = helper + " " + reversed;
-        helper = "";
-
-        // reversed = “  world     hello   ”
-        // step-2 -> remove extra whitespaces(if any)
-        bool isSpace = true;
-        string word = "";
-        string reversed_without_whitespaces = "";
-        for(int i=0;i<reversed.size();++i){
-            if(reversed[i]!=' '){
-                reversed_without_whitespaces+=reversed[i];
-                isSpace = false;
-            }
-            else{
-                if(!isSpace)reversed_without_whitespaces+=' ';
-                isSpace = true;
-            }
-        }
-        return reversed_without_whitespaces;
+        
+        s.resize(j);                           // resize result string
+        reverseword(s,0,j-1);                  // reverse whole string
+        return s;
     }
 };
