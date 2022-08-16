@@ -4,11 +4,16 @@
 # select id,name, if(sex='f','m','f') as sex,salary from Salary;
 
 # WORKING QUERIES
+# 1)
 # update Salary set sex=if(sex='m','f','m');
-update Salary set sex=(
-CASE
-    WHEN sex='m' THEN 'f'
-    ELSE 'm'
-END
-)
-# update Salary set (sex='m' where sex='f') and (sex='f' where sex='m');
+
+# 2)
+# update Salary set sex=(
+# CASE
+#     WHEN sex='m' THEN 'f'
+#     ELSE 'm'
+# END
+# )
+
+# 3)
+UPDATE salary SET sex = REPLACE ('fm', sex, '');
