@@ -12,17 +12,17 @@ public:
     string reverseWords(string &s) {
         
         int i=0, j=0;
-        int l=0;
-        int len=s.length();
+        int last=0;
+        int len=s.size();
         int wordcount=0;
         
         while(true){
             while(i<len && s[i] == ' ') i++;  // skip spaces in front of the word
             if(i==len) break;
             if(wordcount) s[j++]=' ';
-            l=j;
+            last=j;
             while(i<len && s[i] != ' ') {s[j]=s[i]; j++; i++;} 
-            reverseword(s,l,j-1);                // reverse word in place
+            reverseword(s,last,j-1);                // reverse word in place
             wordcount++;
             
         }
